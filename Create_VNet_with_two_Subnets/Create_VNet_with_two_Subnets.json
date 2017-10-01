@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "MyVNet1Prefix": {
+      "defaultValue": "10.0.0.0/16",
+      "type": "string"
+    },
+    "MyVNet1Subnet1Name": {
+      "defaultValue": "Subnet-1",
+      "type": "string"
+    },
+    "MyVNet1Subnet1Prefix": {
+      "defaultValue": "10.0.0.0/24",
+      "type": "string"
+    },
+    "MyVNet1Subnet2Name": {
+      "defaultValue": "Subnet-2",
+      "type": "string"
+    },
+    "MyVNet1Subnet2Prefix": {
+      "defaultValue": "10.0.1.0/24",
+      "type": "string"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "name": "MyVNet1",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "MyVNet1"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('MyVNet1Prefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('MyVNet1Subnet1Name')]",
+            "properties": {
+              "addressPrefix": "[parameters('MyVNet1Subnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[parameters('MyVNet1Subnet2Name')]",
+            "properties": {
+              "addressPrefix": "[parameters('MyVNet1Subnet2Prefix')]"
+            }
+          }
+        ]
+      }
+    }],
+  "outputs": {}
+}
